@@ -1,0 +1,31 @@
+{
+  "plan": "Premium",
+  "date": "22nd May,2023",
+  "daysLeft": 54,
+  "subscriptions":[
+  {
+    "id": 1,
+    "name": "Basic",
+    "price": 112,
+    "currency": "$",
+    "features": ["Unlimited public/private repos","automatic updates","2000CI/CD mins/month"],
+    "duration": 6
+  },
+  {
+    "id": 2,
+    "name": "Standard",
+    "price": 112,
+    "currency": "$",
+    "features": ["Access To Github codespaces","Protected Branches"],
+    "duration": 6
+  },
+  {
+    "id": 3,
+    "name": "Premium",
+    "price": 112,
+    "currency": "$",
+    "features": ["Enterprise Managed Users","User Provisioning","Audit Log API","Unlimited API Calls","Weekly Discounts"],
+    "duration": 6
+  }
+]
+}
