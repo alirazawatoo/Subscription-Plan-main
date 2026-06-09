@@ -59,6 +59,7 @@ class _BasicDialogContent extends StatelessWidget {
                 style: kRubikText.copyWith(
                   fontWeight: FontWeight.w600,
                   fontSize: kHeadingThree,
+                  color: kcPrimaryColor,
                 ),
               ),
               verticalSpaceSmall,
@@ -66,7 +67,7 @@ class _BasicDialogContent extends StatelessWidget {
                 request.description ?? '',
                 textAlign: TextAlign.center,
                 style: kRubikText.copyWith(
-                  fontSize: 13,
+                  fontSize: 14,
                   color: Colors.black54,
                   letterSpacing: 0.10,
                   fontWeight: FontWeight.w500,
@@ -80,7 +81,7 @@ class _BasicDialogContent extends StatelessWidget {
                       onPressed: () =>
                           completer(DialogResponse(confirmed: false)),
                       style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(64, 44),
                       ),
                       child: Text(
                         request.secondaryButtonTitle!,
@@ -94,7 +95,7 @@ class _BasicDialogContent extends StatelessWidget {
                   TextButton(
                     onPressed: () => completer(DialogResponse(confirmed: true)),
                     style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
+                      minimumSize: const Size(64, 44),
                     ),
                     child: Text(
                       request.mainButtonTitle ?? '',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_stacked_starter/app/app.locator.dart';
+import 'package:flutter_stacked_starter/constants/constants.dart';
 import 'package:flutter_stacked_starter/main.dart';
 import 'package:flutter_stacked_starter/models/application_models.dart';
 import 'package:flutter_stacked_starter/services/subscription_service.dart';
@@ -65,7 +66,9 @@ void main() {
 
     await tester.tap(find.text('ACTIVATE PREMIUM PLAN'));
     await tester.pumpAndSettle();
-    expect(find.text('Premium Plan Subscribed'), findsOneWidget);
+    final title = tester.widget<Text>(find.text('Premium Plan Subscribed'));
+    expect(title.style?.color, kcPrimaryColor,
+        reason: 'the dialog card is white, so its title must be dark');
 
     await tester.tap(find.text('OK'));
     await tester.pumpAndSettle();
