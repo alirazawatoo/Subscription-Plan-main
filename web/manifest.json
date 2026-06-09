@@ -1,11 +1,11 @@
 {
-    "name": "flutter_stacked_starter",
-    "short_name": "flutter_stacked_starter",
+    "name": "Subscription Plan",
+    "short_name": "Plans",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#032726",
+    "theme_color": "#032726",
+    "description": "Compare subscription plans and switch to the one that fits.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

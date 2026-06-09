@@ -23,7 +23,7 @@ class SubscriptionDetails extends ViewModelWidget<HomeViewModel> {
             decoration: BoxDecoration(
                 color: const Color(0xFF00B4AF),
                 borderRadius: BorderRadius.circular(100.r)),
-            child: Icon(
+            child: FaIcon(
               FontAwesomeIcons.medal,
               size: 50.sp,
               color: Colors.white,
@@ -42,7 +42,7 @@ class SubscriptionDetails extends ViewModelWidget<HomeViewModel> {
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.r),
-              color: const Color(0xFF00B4AF).withOpacity(0.1),
+              color: const Color(0xFF00B4AF).withValues(alpha: 0.1),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,

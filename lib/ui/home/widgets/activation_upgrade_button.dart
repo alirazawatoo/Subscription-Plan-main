@@ -23,7 +23,7 @@ class ActivationUpgradeButton extends StatelessWidget {
         child: ElevatedButton(
             style: ButtonStyle(
                 backgroundColor:
-                    MaterialStateProperty.all(const Color(0xFF00B4AF))),
+                    WidgetStateProperty.all(const Color(0xFF00B4AF))),
             onPressed: onPressed,
             child: Text(
               title,

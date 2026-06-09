@@ -18,7 +18,7 @@ class PlansList extends ViewModelWidget<HomeViewModel> {
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
-          itemCount: viewModel.subscriptions?.subscriptions.length,
+          itemCount: viewModel.subscriptions?.subscriptions.length ?? 0,
           itemBuilder: (context, index) => GestureDetector(
             onTap: () {
               viewModel.setSelectedIndex(index);

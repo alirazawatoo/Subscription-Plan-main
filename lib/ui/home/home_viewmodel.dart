@@ -4,7 +4,6 @@ import 'package:flutter_stacked_starter/app/app.logger.dart';
 import 'package:flutter_stacked_starter/models/application_models.dart';
 import 'package:flutter_stacked_starter/services/subscription_service.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -39,9 +38,9 @@ class HomeViewModel extends BaseViewModel {
     if (index == 0) {
       return Icons.send;
     } else if (index == 1) {
-      return FontAwesomeIcons.crown;
+      return FontAwesomeIcons.crown.data;
     } else {
-      return Ionicons.diamond;
+      return Icons.diamond;
     }
   }
 
@@ -50,7 +49,7 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  showConfirmationMessage() {
+  void showConfirmationMessage() {
     _dialogService.showDialog(
       title:
           '${_subscriptions?.subscriptions[_selectedIndex].name ?? ''} Plan Subscribed',
