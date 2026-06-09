@@ -30,13 +30,7 @@ class HomeView extends StackedView<HomeViewModel> {
               height: 0.1.h,
             )),
         backgroundColor: kcPrimaryColor,
-        leading: InkWell(
-            onTap: () => viewModel.back,
-            child: Icon(
-              Icons.arrow_back_ios,
-              size: 24.sp,
-              color: Colors.white,
-            )),
+        automaticallyImplyLeading: false,
         title: Text(
           'SUBSCRIPTION PLAN',
           style: kRubikText.copyWith(
@@ -49,13 +43,18 @@ class HomeView extends StackedView<HomeViewModel> {
             ? const Center(
                 child: CircularProgressIndicator(color: Colors.white),
               )
-            : ListView(
-                padding: EdgeInsets.only(bottom: 20.h),
-                children: const [
-                  SubscriptionDetails(),
-                  PlansTitle(),
-                  PlansList(),
-                ],
+            : RefreshIndicator(
+                onRefresh: viewModel.onRefresh,
+                child: ListView(
+                  padding: EdgeInsets.only(bottom: 20.h),
+                  children: viewModel.subscriptions == null
+                      ? const []
+                      : const [
+                          SubscriptionDetails(),
+                          PlansTitle(),
+                          PlansList(),
+                        ],
+                ),
               ),
       ),
     );

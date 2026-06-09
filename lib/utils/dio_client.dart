@@ -3,8 +3,8 @@ import '../constants/constants.dart';
 
 class DioClient {
   static BaseOptions options = BaseOptions(
-    connectTimeout: const Duration(seconds: connectionTimeout),
-    receiveTimeout: const Duration(seconds: receiveTimeout),
+    connectTimeout: const Duration(milliseconds: connectionTimeout),
+    receiveTimeout: const Duration(milliseconds: receiveTimeout),
     contentType: Headers.jsonContentType,
   );
 

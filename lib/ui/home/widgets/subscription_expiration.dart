@@ -66,7 +66,7 @@ class SubscriptionDetails extends ViewModelWidget<HomeViewModel> {
           SizedBox(
             width: 250,
             child: Text(
-              "Your premium plan will expire on ${viewModel.subscriptions?.date}",
+              "Your ${viewModel.subscriptions?.plan} plan will expire on ${viewModel.subscriptions?.date}",
               textAlign: TextAlign.center,
               style: kRubikText.copyWith(
                   fontWeight: FontWeight.w300,

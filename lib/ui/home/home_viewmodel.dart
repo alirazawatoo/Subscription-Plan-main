@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stacked_starter/app/app.logger.dart';
+import 'package:flutter_stacked_starter/enums/basic_dialog_status.dart';
+import 'package:flutter_stacked_starter/enums/dialog_type.dart';
 import 'package:flutter_stacked_starter/models/application_models.dart';
 import 'package:flutter_stacked_starter/services/subscription_service.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,15 +15,15 @@ class HomeViewModel extends BaseViewModel {
   final log = getLogger('HomeViewModel');
   final _dialogService = locator<DialogService>();
   final _subscriptionService = locator<SubscriptionService>();
-  final _navigationService = locator<NavigationService>();
   Subscriptions? _subscriptions;
   Subscriptions? get subscriptions => _subscriptions;
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
   Future<void> getSubscriptions({bool setViewToBusy = true}) async {
     try {
+      final request = _subscriptionService.getSubscriptions();
       _subscriptions =
-          await runBusyFuture(_subscriptionService.getSubscriptions());
+          setViewToBusy ? await runBusyFuture(request) : await request;
       notifyListeners();
     } on DioException catch (e) {
       log.e('DioException occurred: $e');
@@ -31,8 +33,6 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<void> onRefresh() => getSubscriptions(setViewToBusy: false);
-
-  void back() => _navigationService.back();
 
   IconData getIcon(int index) {
     if (index == 0) {
@@ -50,7 +50,10 @@ class HomeViewModel extends BaseViewModel {
   }
 
   void showConfirmationMessage() {
-    _dialogService.showDialog(
+    _dialogService.showCustomDialog(
+      variant: DialogType.basic,
+      data: BasicDialogStatus.success,
+      mainButtonTitle: 'OK',
       title:
           '${_subscriptions?.subscriptions[_selectedIndex].name ?? ''} Plan Subscribed',
       description:
