@@ -17,6 +17,4 @@ import 'package:stacked_services/stacked_services.dart';
   ],
   logger: StackedLogger(),
 )
-class AppSetup {
-  /** Serves No Purpose */
-}
+class AppSetup {}
