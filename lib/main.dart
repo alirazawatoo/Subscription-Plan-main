@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stacked_starter/constants/constants.dart';
+import 'package:flutter_stacked_starter/utils/app_text.dart';
 import 'package:flutter_stacked_starter/utils/shared/setup_dialog.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -12,31 +13,63 @@ void main() {
   runApp(const MyApp());
 }
 
+ThemeData buildTheme() {
+  final scheme = ColorScheme.fromSeed(
+    seedColor: kcSecondaryColor,
+    brightness: Brightness.dark,
+  ).copyWith(
+    primary: kcSecondaryColor,
+    onPrimary: kcPrimaryColor,
+    secondary: kcAccentColor,
+    surface: kcPrimaryColor,
+    onSurface: kcTextColor,
+  );
+  return ThemeData(
+    colorScheme: scheme,
+    fontFamily: kFontFamily,
+    scaffoldBackgroundColor: kcPrimaryColor,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: kcPrimaryColor,
+      foregroundColor: Colors.white,
+      centerTitle: true,
+      elevation: 0,
+      titleTextStyle: TextStyle(
+        fontFamily: kFontFamily,
+        fontSize: 17,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 1.2,
+        color: Colors.white,
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: kcSecondaryColor,
+        foregroundColor: kcPrimaryColor,
+        disabledBackgroundColor: kcSurfaceColor,
+        disabledForegroundColor: kcMutedTextColor,
+        minimumSize: const Size(220, 48),
+        textStyle: const TextStyle(
+          fontFamily: kFontFamily,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.8,
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+    ),
+  );
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(392.72, 759.27),
-      builder: (context, child) => MaterialApp(
-        title: 'Flutter Stacked Starter',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.orange,
-          appBarTheme: const AppBarTheme(
-            titleTextStyle: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-            ),
-            centerTitle: true,
-          ),
-        ),
-        navigatorKey: StackedService.navigatorKey,
-        onGenerateRoute: StackedRouter().onGenerateRoute,
-      ),
+    return MaterialApp(
+      title: 'Subscription Plan',
+      debugShowCheckedModeBanner: false,
+      theme: buildTheme(),
+      navigatorKey: StackedService.navigatorKey,
+      onGenerateRoute: StackedRouter().onGenerateRoute,
     );
   }
 }

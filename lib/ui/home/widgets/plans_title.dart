@@ -1,42 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../utils/app_text.dart';
+import 'package:flutter_stacked_starter/constants/constants.dart';
 
 class PlansTitle extends StatelessWidget {
-  const PlansTitle({
-    super.key,
-  });
+  const PlansTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: 1.h,
-          width: 80.w,
-          decoration: const BoxDecoration(color: Color(0xFF033C3A)),
-          child: const SizedBox(),
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 10.h),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: const Color(0xFF033C3A)),
-          child: Text(
-            "PLANS",
-            style: kRubikText.copyWith(
-                fontSize: 16.sp, color: const Color(0xFFEBEBF0)),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      child: Row(
+        children: [
+          const Expanded(child: Divider(color: kcSurfaceColor, thickness: 1)),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6),
+              color: kcSurfaceColor,
+            ),
+            child: Semantics(
+              header: true,
+              child: const Text(
+                'PLANS',
+                style: TextStyle(
+                  fontSize: 15,
+                  letterSpacing: 2,
+                  fontWeight: FontWeight.w500,
+                  color: kcTextColor,
+                ),
+              ),
+            ),
           ),
-        ),
-        Container(
-          height: 1.h,
-          width: 80.w,
-          decoration: const BoxDecoration(color: Color(0xFF033C3A)),
-          child: const SizedBox(),
-        ),
-      ],
+          const Expanded(child: Divider(color: kcSurfaceColor, thickness: 1)),
+        ],
+      ),
     );
   }
 }

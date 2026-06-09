@@ -1,78 +1,78 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stacked_starter/constants/constants.dart';
 import 'package:flutter_stacked_starter/ui/home/home_viewmodel.dart';
+import 'package:flutter_stacked_starter/utils/ui_helpers.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../utils/app_text.dart';
-import '../../../utils/ui_helpers.dart';
-
+/// Summary of the plan the user is on: name, days left and expiry date.
 class SubscriptionDetails extends ViewModelWidget<HomeViewModel> {
-  const SubscriptionDetails({
-    super.key,
-  });
+  const SubscriptionDetails({super.key});
 
   @override
   Widget build(BuildContext context, HomeViewModel viewModel) {
+    final subscriptions = viewModel.subscriptions!;
     return Padding(
-      padding: EdgeInsets.only(top: 40.h),
+      padding: const EdgeInsets.fromLTRB(24, 32, 24, 8),
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(30.r),
-            decoration: BoxDecoration(
-                color: const Color(0xFF00B4AF),
-                borderRadius: BorderRadius.circular(100.r)),
-            child: FaIcon(
+            padding: const EdgeInsets.all(24),
+            decoration: const BoxDecoration(
+              color: kcSecondaryColor,
+              shape: BoxShape.circle,
+            ),
+            child: const FaIcon(
               FontAwesomeIcons.medal,
-              size: 50.sp,
+              size: 44,
               color: Colors.white,
             ),
           ),
           verticalSpaceRegular,
-          Text(
-            "${viewModel.subscriptions?.plan} Plan",
-            style: kRubikText.copyWith(
+          Semantics(
+            header: true,
+            child: Text(
+              '${subscriptions.plan} Plan',
+              style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
-                fontSize: 22.sp),
+                fontSize: 26,
+              ),
+            ),
           ),
           verticalSpaceSmall,
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.r),
-              color: const Color(0xFF00B4AF).withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(20),
+              color: kcAccentColor.withValues(alpha: 0.12),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Icon(
                   Icons.calendar_month_outlined,
-                  color: Color(0xFFEDA53D),
+                  color: kcAccentColor,
+                  size: 20,
                 ),
                 horizontalSpaceSmall,
                 Text(
-                  "${viewModel.subscriptions?.daysLeft} Days Left",
-                  style: kRubikText.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.sp,
-                      color: const Color(0xFFEDA53D)),
+                  '${subscriptions.daysLeft} days left',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: kcAccentColor,
+                  ),
                 ),
               ],
             ),
           ),
           verticalSpaceSmall,
-          SizedBox(
-            width: 250,
-            child: Text(
-              "Your ${viewModel.subscriptions?.plan} plan will expire on ${viewModel.subscriptions?.date}",
-              textAlign: TextAlign.center,
-              style: kRubikText.copyWith(
-                  fontWeight: FontWeight.w300,
-                  color: const Color(0xFFEBEBF0),
-                  fontSize: 14.sp),
-            ),
+          Text(
+            'Your ${subscriptions.plan} plan will expire on '
+            '${subscriptions.date}',
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: kcMutedTextColor, fontSize: 15),
           ),
           verticalSpaceMedium,
         ],

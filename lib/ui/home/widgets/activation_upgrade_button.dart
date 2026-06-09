@@ -1,35 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../utils/app_text.dart';
-
+/// Full-width call to action under the plan list; disabled when [onPressed]
+/// is null, e.g. while the current plan is selected.
 class ActivationUpgradeButton extends StatelessWidget {
-  final void Function()? onPressed;
-  final String title;
   const ActivationUpgradeButton({
     super.key,
     this.onPressed,
     required this.title,
   });
 
+  final VoidCallback? onPressed;
+  final String title;
+
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Container(
-        margin: EdgeInsets.only(top: 15.h),
-        height: 40.h,
-        width: 250.w,
-        child: ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor:
-                    WidgetStateProperty.all(const Color(0xFF00B4AF))),
-            onPressed: onPressed,
-            child: Text(
-              title,
-              style: kRubikText.copyWith(
-                  color: Colors.white, fontWeight: FontWeight.w400),
-            )),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+      child: SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(onPressed: onPressed, child: Text(title)),
       ),
     );
   }

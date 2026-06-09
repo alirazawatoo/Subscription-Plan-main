@@ -14,7 +14,10 @@ class BasicDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: Colors.transparent,
-      child: _BasicDialogContent(request: request, completer: completer),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 420),
+        child: _BasicDialogContent(request: request, completer: completer),
+      ),
     );
   }
 }
@@ -35,9 +38,7 @@ class _BasicDialogContent extends StatelessWidget {
       alignment: Alignment.topCenter,
       children: [
         Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: screenWidthPercentage(context, percentage: 0.07),
-          ),
+          margin: const EdgeInsets.symmetric(horizontal: 24),
           padding: const EdgeInsets.only(
             top: 20,
             left: 12,
