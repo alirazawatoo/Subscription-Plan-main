@@ -9,7 +9,7 @@ import '../home_viewmodel.dart';
 
 class SubScriptionTile extends ViewModelWidget<HomeViewModel> {
   final String name;
-  final int price;
+  final num price;
   final String currency;
   final List<String> features;
   final int duration;

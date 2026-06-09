@@ -1,31 +1,42 @@
 {
-  "plan": "Premium",
-  "date": "22nd May,2023",
+  "plan": "Standard",
+  "date": "22 May 2027",
   "daysLeft": 54,
-  "subscriptions":[
-  {
-    "id": 1,
-    "name": "Basic",
-    "price": 112,
-    "currency": "$",
-    "features": ["Unlimited public/private repos","automatic updates","2000CI/CD mins/month"],
-    "duration": 6
-  },
-  {
-    "id": 2,
-    "name": "Standard",
-    "price": 112,
-    "currency": "$",
-    "features": ["Access To Github codespaces","Protected Branches"],
-    "duration": 6
-  },
-  {
-    "id": 3,
-    "name": "Premium",
-    "price": 112,
-    "currency": "$",
-    "features": ["Enterprise Managed Users","User Provisioning","Audit Log API","Unlimited API Calls","Weekly Discounts"],
-    "duration": 6
-  }
-]
+  "subscriptions": [
+    {
+      "id": 1,
+      "name": "Basic",
+      "price": 9,
+      "currency": "$",
+      "features": ["Up to 3 projects", "5 GB file storage", "Email support"],
+      "duration": 1
+    },
+    {
+      "id": 2,
+      "name": "Standard",
+      "price": 49,
+      "currency": "$",
+      "features": [
+        "Unlimited projects",
+        "50 GB file storage",
+        "Shared team calendars",
+        "Priority email support"
+      ],
+      "duration": 6
+    },
+    {
+      "id": 3,
+      "name": "Premium",
+      "price": 89.5,
+      "currency": "$",
+      "features": [
+        "Everything in Standard",
+        "1 TB file storage",
+        "Single sign-on",
+        "Audit log export",
+        "Named account manager"
+      ],
+      "duration": 12
+    }
+  ]
 }

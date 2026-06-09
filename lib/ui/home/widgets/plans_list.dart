@@ -36,7 +36,7 @@ class PlansList extends ViewModelWidget<HomeViewModel> {
               features:
                   viewModel.subscriptions?.subscriptions[index].features ?? [],
               name: viewModel.subscriptions?.subscriptions[index].name ?? '',
-              price: viewModel.subscriptions?.subscriptions[index].price ?? 0,
+              price: viewModel.plans[index].price,
             ),
           ),
         ),

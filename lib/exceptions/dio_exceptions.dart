@@ -24,6 +24,9 @@ class DioExceptions implements Exception {
       case DioExceptionType.sendTimeout:
         message = 'Send timeout in connection with API server';
         break;
+      case DioExceptionType.connectionError:
+        message = 'Could not reach the API server';
+        break;
       case DioExceptionType.unknown:
         if (dioError.message?.contains('SocketException') ?? false) {
           message = 'No Internet';

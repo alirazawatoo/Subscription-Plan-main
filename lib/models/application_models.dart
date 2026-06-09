@@ -7,54 +7,57 @@ class ApiResponse {
   final int? statusCode;
 }
 
-// To parse this JSON data, do
-//
-//     final subscriptions = subscriptionsFromJson(jsonString);
-
 Subscriptions subscriptionsFromJson(String str) =>
     Subscriptions.fromJson(json.decode(str));
 
 String subscriptionsToJson(Subscriptions data) => json.encode(data.toJson());
 
 class Subscriptions {
-  String plan;
-  String date;
-  int daysLeft;
-  List<Subscription> subscriptions;
-
-  Subscriptions({
+  const Subscriptions({
     required this.plan,
     required this.date,
     required this.daysLeft,
     required this.subscriptions,
   });
 
-  factory Subscriptions.fromJson(Map<String, dynamic> json) => Subscriptions(
-        plan: json["plan"],
-        date: json["date"],
-        daysLeft: json["daysLeft"],
-        subscriptions: List<Subscription>.from(
-            json["subscriptions"].map((x) => Subscription.fromJson(x))),
+  /// Name of the plan the user is currently on.
+  final String plan;
+
+  /// Expiry date of the current plan, already formatted for display.
+  final String date;
+  final int daysLeft;
+  final List<Subscription> subscriptions;
+
+  /// Throws a [FormatException] when a field is missing or has the wrong type,
+  /// so a malformed payload surfaces as an error state instead of a crash.
+  factory Subscriptions.fromJson(Object? json) {
+    if (json
+        case {
+          'plan': String plan,
+          'date': String date,
+          'daysLeft': int daysLeft,
+          'subscriptions': List<dynamic> items,
+        }) {
+      return Subscriptions(
+        plan: plan,
+        date: date,
+        daysLeft: daysLeft,
+        subscriptions: [for (final item in items) Subscription.fromJson(item)],
       );
+    }
+    throw const FormatException('Unexpected subscriptions payload');
+  }
 
   Map<String, dynamic> toJson() => {
-        "plan": plan,
-        "date": date,
-        "daysLeft": daysLeft,
-        "subscriptions":
-            List<dynamic>.from(subscriptions.map((x) => x.toJson())),
+        'plan': plan,
+        'date': date,
+        'daysLeft': daysLeft,
+        'subscriptions': [for (final s in subscriptions) s.toJson()],
       };
 }
 
 class Subscription {
-  int id;
-  String name;
-  int price;
-  String currency;
-  List<String> features;
-  int duration;
-
-  Subscription({
+  const Subscription({
     required this.id,
     required this.name,
     required this.price,
@@ -63,21 +66,49 @@ class Subscription {
     required this.duration,
   });
 
-  factory Subscription.fromJson(Map<String, dynamic> json) => Subscription(
-        id: json["id"],
-        name: json["name"],
-        price: json["price"],
-        currency: json["currency"],
-        features: List<String>.from(json["features"].map((x) => x)),
-        duration: json["duration"],
+  final int id;
+  final String name;
+  final num price;
+  final String currency;
+  final List<String> features;
+
+  /// Billing period in months.
+  final int duration;
+
+  String get formattedPrice => price == price.roundToDouble()
+      ? '$currency${price.toInt()}'
+      : '$currency${price.toStringAsFixed(2)}';
+
+  String get billingPeriod => duration == 1 ? 'month' : '$duration months';
+
+  factory Subscription.fromJson(Object? json) {
+    if (json
+        case {
+          'id': int id,
+          'name': String name,
+          'price': num price,
+          'currency': String currency,
+          'features': List<dynamic> features,
+          'duration': int duration,
+        } when features.every((feature) => feature is String)) {
+      return Subscription(
+        id: id,
+        name: name,
+        price: price,
+        currency: currency,
+        features: features.cast<String>().toList(growable: false),
+        duration: duration,
       );
+    }
+    throw const FormatException('Unexpected subscription payload');
+  }
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "price": price,
-        "currency": currency,
-        "features": List<dynamic>.from(features.map((x) => x)),
-        "duration": duration,
+        'id': id,
+        'name': name,
+        'price': price,
+        'currency': currency,
+        'features': features,
+        'duration': duration,
       };
 }
